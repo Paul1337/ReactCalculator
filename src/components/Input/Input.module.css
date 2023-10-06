@@ -1,0 +1,27 @@
+.Input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.inputField {
+    padding: 8px;
+    flex: 1;
+    outline: none;
+}
+
+.historyToggleButton {
+    background-image: url("../../assets/history.png");
+    background-size: cover;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+    margin-left: 6px;
+}
+
+.historyToggleButton:hover {
+    cursor: pointer;
+    filter: contrast(2.5);
+}

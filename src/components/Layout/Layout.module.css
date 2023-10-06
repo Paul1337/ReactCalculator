@@ -1,0 +1,6 @@
+.Layout {
+    padding: 6px;
+    transform: scale(2);
+    border: 1px solid black;
+    min-width: 300px;
+}
