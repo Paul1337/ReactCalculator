@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Calculator from './components/Calculator/Calculator';
 import { EButtonType, TCalculatorButtons } from './components/Calculator/model/buttons';
 
@@ -39,20 +40,41 @@ const config: IConfig = {
 };
 
 const App = () => {
+    const [calculatorsCount, setCalculatorsCount] = useState(-1);
+
+    const handleAdd = () => setCalculatorsCount((count) => count + 1);
+    const handleRemove = () => setCalculatorsCount((count) => (count > 1 ? count - 1 : 0));
+
+    useEffect(() => {
+        if (calculatorsCount === -1) {
+            const calcCount = localStorage.getItem('calculators-count');
+            setCalculatorsCount(calculatorsCount ? Number(calcCount) : 0);
+        } else {
+            localStorage.setItem('calculators-count', calculatorsCount.toString());
+        }
+    }, [calculatorsCount]);
+
     return (
         <>
-            <Calculator
-                buttons={config.buttons}
-                historyLength={config.historyLength}
-                className='calculator'
-                localStorKey='calculator'
-            />
-            <Calculator
-                buttons={config.buttons}
-                historyLength={config.historyLength}
-                className='calculator'
-                localStorKey='calculator-2'
-            />
+            <button className='control-btn' onClick={handleAdd}>
+                Add (+)
+            </button>
+            <button className='control-btn' onClick={handleRemove}>
+                Remove (-)
+            </button>
+            <div className='control-counter'>Count: {calculatorsCount}</div>
+            <hr />
+            <div>
+                {new Array(Math.max(calculatorsCount, 0)).fill(0).map((el, ind) => (
+                    <Calculator
+                        key={ind}
+                        buttons={config.buttons}
+                        historyLength={config.historyLength}
+                        className='calculator'
+                        localStorKey={'calculator-' + ind}
+                    />
+                ))}
+            </div>
         </>
     );
 };

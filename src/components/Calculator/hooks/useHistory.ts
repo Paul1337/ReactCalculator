@@ -24,7 +24,7 @@ export const useHistory = (params: IHistoryParams) => {
 
     const pushHistory = (item: IHistoryItem) => {
         if (history?.some((hisItem) => hisItem.expression === item.expression)) return;
-        setHistory((prevHistory) => [item, ...(prevHistory ?? []).slice(0, params.length)]);
+        setHistory((prevHistory) => [item, ...(prevHistory ?? []).slice(0, params.length - 1)]);
     };
 
     return {
