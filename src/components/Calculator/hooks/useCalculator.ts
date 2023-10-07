@@ -85,10 +85,9 @@ export const useCalculator = (params: ICalculatorParams) => {
 
     const handleInputChange = (newExpression: string) => {
         const lastChar = newExpression[newExpression.length - 1];
-        const didInsertCharacter = newExpression.length > expression.length;
-        if (didInsertCharacter && lastChar) {
+        if (lastChar) {
             const button = params.buttons.flat().find((btn) => btn.value.toString() === lastChar);
-            if (button) return handleButton(button);
+            if (button?.type === EButtonType.Calculate) return calculate();
         }
         tryUpdateExpression(newExpression);
     };
