@@ -19,11 +19,10 @@ const Calculator: FC<ICalculatorProps> = (props) => {
     const { className, localStorKey, buttons, historyLength } = props;
     const [showHistory, setShowHistory] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
-    // 1. useCalculator слишком много функций на себя взял
 
     const { expression, history, error, handleButton, handleInputChange, handleHistoryItemClick } =
         useCalculator({ localStorKey, buttons, historyLength, inputRef });
-    const handleHistoryToggleClick = () => setShowHistory(!showHistory);
+    const handleHistoryToggleClick = () => setShowHistory((prevState) => !prevState);
 
     return (
         <Layout className={className}>

@@ -11,6 +11,7 @@ const config: IConfig = {
         [0, 1, 2, 3, 4],
         [5, 6, 7, 8, 9],
         ['.', '/', '*', '+', '-'],
+        ['(', ')'],
     ]
         .map((row) =>
             row.map((v) => ({
@@ -42,13 +43,13 @@ const App = () => {
         <>
             <Calculator
                 buttons={config.buttons}
-                historyLength={5}
+                historyLength={config.historyLength}
                 className='calculator'
                 localStorKey='calculator'
             />
             <Calculator
                 buttons={config.buttons}
-                historyLength={5}
+                historyLength={config.historyLength}
                 className='calculator'
                 localStorKey='calculator-2'
             />

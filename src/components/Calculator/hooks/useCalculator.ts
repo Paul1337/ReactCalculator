@@ -3,6 +3,7 @@ import { useHistory } from './useHistory';
 import { EButtonType, IButton, TCalculatorButtons } from '../model/buttons';
 import { validateExpression } from '../lib/validation';
 import { IHistoryItem } from '../model/history';
+import { evaluate } from 'mathjs';
 
 interface ICalculatorParams {
     localStorKey: string;
@@ -50,7 +51,7 @@ export const useCalculator = (params: ICalculatorParams) => {
     const calculate = () => {
         try {
             if (expression.length === 0) return;
-            const result = eval(expression).toString();
+            const result = evaluate(expression).toString();
             if (result !== expression && result.length > 0 && expression.length > 0) {
                 pushHistory({ expression, result });
                 setExpression(result);
@@ -84,7 +85,8 @@ export const useCalculator = (params: ICalculatorParams) => {
 
     const handleInputChange = (newExpression: string) => {
         const lastChar = newExpression[newExpression.length - 1];
-        if (newExpression.length > expression.length && lastChar) {
+        const didInsertCharacter = newExpression.length > expression.length;
+        if (didInsertCharacter && lastChar) {
             const button = params.buttons.flat().find((btn) => btn.value.toString() === lastChar);
             if (button) return handleButton(button);
         }
