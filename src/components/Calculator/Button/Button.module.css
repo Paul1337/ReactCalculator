@@ -1,6 +1,6 @@
 .Button {
-    width: 30px;
-    height: 30px;
+    /* width: 30px; */
+    height: 40px;
     border-radius: 4px;
     margin: 4px;
     position: relative;
@@ -8,6 +8,7 @@
     cursor: pointer;
     border: 1px solid transparent;
     border: 1px solid black;
+    flex-grow: 1;
 }
 
 .Button:hover {

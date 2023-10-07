@@ -9,19 +9,19 @@
 .inputField {
     padding: 8px;
     flex: 1;
+    font-size: 24px;
     outline: none;
 }
 
 .historyToggleButton {
-    background-image: url("../../assets/history.png");
+    background-image: url("../../../assets/buttons/history.png");
     background-size: cover;
     background-position: center;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     margin-left: 6px;
 }
 
 .historyToggleButton:hover {
     cursor: pointer;
-    filter: contrast(2.5);
 }

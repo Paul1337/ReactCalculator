@@ -1,0 +1,10 @@
+.Layout {
+    width: 350px;
+    /* height: 300px; */
+    display: inline-block;
+    padding: 6px;
+    border: 1px solid black;
+    min-width: 300px;
+    background-color: white;
+    vertical-align: top;
+}

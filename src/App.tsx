@@ -1,36 +1,58 @@
-import Button from './components/Button/Button';
-import Input from './components/Input/Input';
-import Layout from './components/Layout/Layout';
-import cls from './App.module.css';
-import { useStore } from './store';
-import { config } from './config';
+import Calculator from './components/Calculator/Calculator';
+import { EButtonType, TCalculatorButtons } from './components/Calculator/model/buttons';
+
+interface IConfig {
+    buttons: TCalculatorButtons;
+    historyLength: number;
+}
+
+const config: IConfig = {
+    buttons: [
+        [0, 1, 2, 3, 4],
+        [5, 6, 7, 8, 9],
+        ['.', '/', '*', '+', '-'],
+    ]
+        .map((row) =>
+            row.map((v) => ({
+                type: EButtonType.Character,
+                value: v,
+            }))
+        )
+        .concat([
+            [
+                {
+                    type: EButtonType.Calculate,
+                    value: '=',
+                },
+                {
+                    type: EButtonType.Backspace,
+                    value: 'DEL',
+                },
+                {
+                    type: EButtonType.Clear,
+                    value: 'AC',
+                },
+            ],
+        ]),
+    historyLength: 5,
+};
 
 const App = () => {
-    const { append } = useStore();
-
-    const handleButtonClick = (char: string) => {
-        append(char);
-    };
-
     return (
-        <Layout>
-            <Input />
-            <hr />
-            <div className={cls.buttonsContainer}>
-                {config.buttons
-                    .map((v) => v.toString())
-                    .map((char, ind) => {
-                        return [
-                            ind % config.buttonsInRow === 0 && ind > 0 && <br key={'br' + char + ind} />,
-                            <Button
-                                value={char}
-                                key={char + ind}
-                                onClick={() => handleButtonClick(char)}
-                            />,
-                        ].filter(Boolean);
-                    })}
-            </div>
-        </Layout>
+        <>
+            <Calculator
+                buttons={config.buttons}
+                historyLength={5}
+                className='calculator'
+                localStorKey='calculator'
+            />
+            <Calculator
+                buttons={config.buttons}
+                historyLength={5}
+                className='calculator'
+                localStorKey='calculator-2'
+            />
+        </>
     );
 };
 
